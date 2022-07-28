@@ -29,7 +29,7 @@ jobs:
 
       - name: Draft Release
         id: update_release_draft
-        uses: tiller1010/release-drafter@v5
+        uses: tiller1010/release-drafter
         with:
           last_tag: ${{ steps.last_tag.outputs.last_tag_on_branch }}
         env:
