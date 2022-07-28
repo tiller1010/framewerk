@@ -20,9 +20,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
+      # Get the last tag created on this branch
+      - name: Get Last Tag
+        id: last_tag
+        run: |
+          LASTTAG=$(git describe --tags | sed -re "s/-.+//")
+          echo "::set-output name=last_tag_on_branch::$LASTTAG"
+
       - name: Draft Release
         id: update_release_draft
-        uses: release-drafter/release-drafter@v5
+        uses: tiller1010/release-drafter@v5
+        with:
+          last_tag: ${{ steps.last_tag.outputs.last_tag_on_branch }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
