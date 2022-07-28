@@ -17,14 +17,14 @@ jobs:
     outputs:
       output: ${{ steps.update_release_draft.outputs.tag_name }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
       - name: Draft Release
         id: update_release_draft
         uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Checkout
-        uses: actions/checkout@master
 
       # Get the current package.json version number
       - name: Compare Versions
