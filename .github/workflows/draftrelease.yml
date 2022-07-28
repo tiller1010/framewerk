@@ -24,6 +24,7 @@ jobs:
       - name: Get Last Tag
         id: last_tag
         run: |
+          git pull
           LASTTAG=$(git describe --tags | sed -re "s/-.+//")
           echo "::set-output name=last_tag_on_branch::$LASTTAG"
 
